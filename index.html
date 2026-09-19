@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa tomada · Julio Cortázar — material para el club de lectura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light dark;
+  --paper:#EDEFEB;
+  --card:#FAFBF8;
+  --ink:#1A2430;
+  --ink-soft:#4E5A66;
+  --ink-faint:#7C8892;
+  --azul:#2B5C83;
+  --azul-deep:#1C3E5A;
+  --azul-wash:#E1E8EE;
+  --hebra:#8A6A9E;
+  --hebra-wash:#EDE6F2;
+  --linea:rgba(26,36,48,.15);
+  --linea-fuerte:rgba(26,36,48,.32);
+  --tomado:rgba(26,36,48,.78);
+  --sombra:0 1px 2px rgba(26,36,48,.05), 0 8px 24px -16px rgba(26,36,48,.35);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131A20;
+    --card:#1A222A;
+    --ink:#E6E9E6;
+    --ink-soft:#A3AEB7;
+    --ink-faint:#7C8892;
+    --azul:#82B2D8;
+    --azul-deep:#A8CBE6;
+    --azul-wash:#1E2C38;
+    --hebra:#BFA3D2;
+    --hebra-wash:#25203040;
+    --linea:rgba(255,255,255,.13);
+    --linea-fuerte:rgba(255,255,255,.3);
+    --tomado:rgba(230,233,230,.7);
+    --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131A20; --card:#1A222A; --ink:#E6E9E6; --ink-soft:#A3AEB7; --ink-faint:#7C8892;
+  --azul:#82B2D8; --azul-deep:#A8CBE6; --azul-wash:#1E2C38; --hebra:#BFA3D2; --hebra-wash:#25203040;
+  --linea:rgba(255,255,255,.13); --linea-fuerte:rgba(255,255,255,.3); --tomado:rgba(230,233,230,.7);
+  --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 24px)}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms!important; transition-duration:.001ms!important} }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+::selection{background:var(--hebra-wash); color:var(--ink)}
+:focus-visible{outline:2px solid var(--hebra); outline-offset:3px; border-radius:2px}
+
+/* hilo de progreso */
+#hilo{position:fixed; top:0; left:0; height:2px; width:0; background:var(--hebra); z-index:60}
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+
+/* ---------- portada ---------- */
+header.hero{
+  padding:clamp(48px,9vw,110px) 0 clamp(36px,5vw,60px);
+  border-bottom:1px solid var(--linea);
+}
+.kicker{font-size:13px; letter-spacing:.02em; color:var(--ink-faint); margin:0 0 28px}
+.kicker b{font-weight:500; color:var(--ink-soft)}
+h1{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(56px,13vw,132px);
+  line-height:.92;
+  letter-spacing:-.025em;
+  margin:0;
+}
+h1 .t2{display:block; color:var(--ink-soft)}
+.autoria{
+  font-family:var(--serif); font-size:clamp(20px,3vw,27px); font-weight:400;
+  margin:22px 0 0; color:var(--ink);
+}
+.autoria span{color:var(--ink-faint); font-size:.72em}
+.metas{
+  display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:34px;
+  font-size:14px; color:var(--ink-soft); border-top:1px solid var(--linea); padding-top:18px;
+}
+.metas div b{display:block; font-weight:500; color:var(--ink-faint); font-size:12.5px}
+
+/* ---------- barra de controles ---------- */
+.controles{
+  position:sticky; top:0; z-index:50;
+  padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);
+}
+.controles .wrap{display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; padding-bottom:10px}
+.controles nav{display:flex; gap:4px; margin-right:auto; flex-wrap:wrap}
+.controles nav a{
+  color:var(--ink-soft); text-decoration:none; font-size:14px; padding:5px 10px; border-radius:100px;
+}
+.controles nav a:hover{color:var(--ink); background:var(--azul-wash)}
+.btn{
+  font:inherit; font-size:13.5px; color:var(--ink-soft); background:transparent;
+  border:1px solid var(--linea-fuerte); border-radius:100px; padding:6px 13px; cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+}
+.btn:hover{color:var(--ink); border-color:var(--ink-soft)}
+.btn[aria-pressed="true"]{background:var(--hebra); border-color:var(--hebra); color:#fff}
+.btn .dot{width:8px; height:8px; border-radius:50%; background:currentColor; opacity:.55}
+
+/* ---------- presentación ---------- */
+.intro{padding:clamp(44px,7vw,84px) 0}
+.intro-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); gap:clamp(24px,5vw,72px)}
+.intro h2, .seccion h2{
+  font-family:var(--serif); font-weight:400; font-size:clamp(28px,4vw,40px);
+  line-height:1.1; letter-spacing:-.015em; margin:0 0 14px;
+}
+.intro h2 + p{color:var(--ink-soft); font-size:15px; max-width:34ch; margin:0}
+.notas{display:grid; gap:0; border-top:1px solid var(--linea)}
+.nota{display:grid; grid-template-columns:auto 1fr; gap:20px; padding:20px 0; border-bottom:1px solid var(--linea)}
+.nota .anio{
+  font-family:var(--serif); font-size:20px; color:var(--azul); font-variant-numeric:lining-nums;
+  min-width:3.4em; line-height:1.4;
+}
+.nota p{margin:0; font-size:15.5px; color:var(--ink-soft); line-height:1.62; max-width:62ch}
+.nota p strong{color:var(--ink); font-weight:500}
+.nota em{font-style:italic}
+
+/* ---------- plano ---------- */
+.plano{
+  --tinta:#63512F; --muro:#EFE7D6; --puerta:#E0A85F;
+  background:var(--tinta); color:var(--muro);
+  padding:clamp(44px,7vw,84px) 0; border-top:1px solid var(--linea);
+}
+.plano h2{color:var(--muro)}
+.plano-cab{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:30px}
+.plano-cab p{margin:8px 0 0; color:rgba(239,231,214,.72); font-size:15px; max-width:58ch}
+.estados{display:flex; gap:8px; flex-wrap:wrap}
+.estados button{
+  font:inherit; font-size:13.5px; padding:8px 14px; border-radius:100px; cursor:pointer;
+  border:1px solid rgba(239,231,214,.45); background:transparent; color:rgba(239,231,214,.8);
+}
+.estados button:hover{border-color:var(--muro); color:var(--muro)}
+.estados button[aria-selected="true"]{background:var(--muro); border-color:var(--muro); color:var(--tinta)}
+.plano-svg{width:100%; height:auto; display:block; margin:0 auto; max-width:1000px}
+.plano-svg .pieza{
+  fill:rgba(0,0,0,0); stroke:var(--muro); stroke-width:6; stroke-linejoin:miter;
+  transition:fill .5s ease;
+}
+.plano-svg .pieza.tomada{fill:rgba(20,12,4,.52)}
+.plano-svg .marca-num circle{fill:none; stroke:var(--muro); stroke-width:1.5}
+.plano-svg .marca-num text{font-family:var(--sans); font-size:14px; fill:var(--muro); font-variant-numeric:lining-nums}
+.plano-svg .marca-num{transition:opacity .5s ease}
+.plano-svg .marca-num.apagada{opacity:.34}
+.plano-svg .hoja{stroke:var(--puerta); stroke-width:5; stroke-linecap:round; fill:none}
+.plano-svg .rotulo{font-family:var(--sans); font-size:13px; fill:rgba(239,231,214,.6); letter-spacing:.01em}
+.plano-abajo{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(24px,5vw,60px); margin-top:clamp(28px,4vw,44px);
+  border-top:1px solid rgba(239,231,214,.22); padding-top:26px;
+}
+.plano-leyenda p{margin:0 0 16px; font-size:15.5px; line-height:1.6; color:rgba(239,231,214,.78)}
+.plano-leyenda .cita{font-family:var(--serif); font-size:19px; line-height:1.45; color:var(--muro); border-left:2px solid var(--puerta); padding-left:16px}
+.clave{
+  list-style:none; margin:0; padding:0; columns:2 200px; column-gap:36px;
+  font-size:14.5px; color:rgba(239,231,214,.8);
+}
+.clave li{break-inside:avoid; padding:4px 0; display:flex; gap:10px; align-items:baseline}
+.clave li b{
+  font-weight:400; font-variant-numeric:lining-nums; color:var(--puerta);
+  min-width:1.6em; text-align:right; flex:none;
+}
+.clave .credito{display:block; margin-top:18px; font-size:13px; color:rgba(239,231,214,.55); line-height:1.5; column-span:all}
+
+/* ---------- lectura ---------- */
+.lectura{padding:clamp(48px,7vw,88px) 0}
+.pasaje{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,258px);
+  gap:clamp(24px,4vw,56px); align-items:start;
+  padding-bottom:30px;
+}
+.prosa{font-family:var(--serif); font-size:19.5px; line-height:1.75; max-width:68ch; letter-spacing:.002em}
+.prosa p{margin:0 0 1.15em; text-align:justify; hyphens:auto}
+.prosa p.dialogo{text-align:left; padding-left:.2em}
+.prosa .aparte{color:var(--ink-soft)}
+.prosa p:first-child.capitular::first-letter{
+  font-size:3.45em; line-height:.82; float:left; padding:.06em .1em 0 0; font-weight:400; color:var(--azul-deep);
+}
+
+/* palabra marcada */
+.v{
+  cursor:pointer; color:inherit; border:0; background:none; font:inherit; padding:0;
+  text-decoration:underline; text-decoration-color:var(--hebra);
+  text-decoration-style:dotted; text-decoration-thickness:1.5px; text-underline-offset:.2em;
+}
+.v:hover, .v.activa{background:var(--hebra-wash); text-decoration-style:solid}
+body.sin-marcas .v{text-decoration:none; background:none}
+body.sin-marcas .v:hover{text-decoration:underline dotted var(--hebra)}
+
+/* rail de glosario */
+.glosa{
+  position:sticky; top:74px;
+  max-height:calc(100vh - 110px); overflow-y:auto; overscroll-behavior:contain;
+  border-top:1px solid var(--linea); padding:14px 10px 4px 0;
+  font-size:14px; line-height:1.5;
+  scrollbar-width:thin; scrollbar-color:var(--linea-fuerte) transparent;
+}
+.glosa::-webkit-scrollbar{width:5px}
+.glosa::-webkit-scrollbar-thumb{background:var(--linea-fuerte); border-radius:4px}
+.glosa h3{
+  font:inherit; font-size:12.5px; font-weight:500; color:var(--ink-faint);
+  margin:0 0 12px;
+}
+.glosa dl{margin:0}
+.glosa dt{font-weight:500; color:var(--ink); display:inline}
+.glosa dd{margin:0 0 11px; display:inline; color:var(--ink-soft)}
+.glosa .item{padding:5px 8px; margin:0 -8px; border-radius:6px; transition:background .3s ease}
+.glosa .item.resaltado{background:var(--hebra-wash)}
+.glosa .item.resaltado dt{color:var(--hebra)}
+
+/* separador de toma */
+.corte{
+  display:flex; align-items:center; gap:18px; margin:6px 0 34px; color:var(--hebra);
+  font-size:13.5px;
+}
+.corte::before, .corte::after{content:""; height:1px; background:var(--linea); flex:1}
+.corte span{white-space:nowrap}
+
+/* popover */
+#pop{
+  position:absolute; z-index:70; max-width:300px; background:var(--card); color:var(--ink);
+  border:1px solid var(--linea-fuerte); border-radius:10px; box-shadow:var(--sombra);
+  padding:13px 15px; font-size:14.5px; line-height:1.5; display:none;
+}
+#pop strong{display:block; font-weight:600; margin-bottom:4px; color:var(--hebra)}
+#pop.visible{display:block}
+
+/* ---------- preguntas ---------- */
+.seccion{padding:clamp(48px,7vw,88px) 0; border-top:1px solid var(--linea)}
+.seccion.alt{background:var(--card)}
+.seccion-cab{max-width:60ch; margin-bottom:34px}
+.seccion-cab p{margin:10px 0 0; color:var(--ink-soft); font-size:15.5px}
+.preguntas{display:grid; gap:0; border-top:1px solid var(--linea)}
+.pregunta{padding:26px 0; border-bottom:1px solid var(--linea); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(16px,3vw,32px)}
+.pregunta .n{font-family:var(--serif); font-size:26px; color:var(--hebra); line-height:1; padding-top:4px; min-width:1.4em}
+.pregunta h3{font-family:var(--serif); font-weight:400; font-size:clamp(20px,2.6vw,25px); line-height:1.35; margin:0 0 14px; max-width:46ch}
+.pregunta .cita-int{font-style:italic}
+textarea{
+  width:100%; min-height:88px; resize:vertical; font:inherit; font-size:16px; color:var(--ink);
+  background:var(--paper); border:1px solid var(--linea-fuerte); border-radius:8px; padding:12px 14px;
+  line-height:1.55;
+}
+.seccion.alt textarea{background:var(--paper)}
+textarea::placeholder{color:var(--ink-faint)}
+.fila{display:flex; align-items:center; gap:12px; margin-top:10px; flex-wrap:wrap}
+.pista{
+  margin:0; font-size:14.5px; color:var(--ink-soft); background:var(--azul-wash);
+  border-radius:8px; padding:12px 14px; max-width:62ch;
+}
+.pista[hidden]{display:none}
+.acciones{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:28px}
+.aviso{font-size:13.5px; color:var(--ink-faint); margin:0}
+
+/* ---------- quiz ---------- */
+.quiz{display:grid; gap:14px; max-width:74ch}
+.q{border:1px solid var(--linea); border-radius:12px; padding:20px 22px; background:var(--paper)}
+.seccion.alt .q{background:var(--paper)}
+.q p.enunciado{margin:0 0 14px; font-family:var(--serif); font-size:19px; line-height:1.45}
+.opciones{display:grid; gap:8px}
+.opcion{
+  display:flex; gap:11px; align-items:flex-start; padding:10px 13px; border-radius:8px; cursor:pointer;
+  border:1px solid var(--linea); font-size:15.5px; line-height:1.45; background:transparent;
+  text-align:left; font-family:var(--sans); color:var(--ink);
+}
+.opcion:hover{border-color:var(--ink-soft)}
+.opcion .marca{width:19px; height:19px; border-radius:50%; border:1.5px solid var(--linea-fuerte); flex:none; margin-top:1px}
+.opcion.bien{border-color:var(--azul); background:var(--azul-wash)}
+.opcion.bien .marca{background:var(--azul); border-color:var(--azul)}
+.opcion.mal{border-color:var(--hebra); opacity:.75}
+.opcion.mal .marca{background:var(--hebra); border-color:var(--hebra)}
+.q .feedback{margin:14px 0 0; font-size:14.5px; color:var(--ink-soft); border-left:2px solid var(--azul); padding-left:14px}
+.q .feedback[hidden]{display:none}
+.marcador{font-size:14.5px; color:var(--ink-soft); margin:18px 0 0}
+
+/* ---------- glosario final ---------- */
+.buscador{display:flex; gap:10px; align-items:center; margin-bottom:24px; flex-wrap:wrap}
+input[type="search"]{
+  font:inherit; font-size:15px; padding:9px 14px; border-radius:100px; border:1px solid var(--linea-fuerte);
+  background:var(--paper); color:var(--ink); min-width:min(320px,100%);
+}
+.glosario-full{columns:3 260px; column-gap:44px; font-size:15px}
+.glosario-full .item{break-inside:avoid; padding:0 0 14px; margin:0}
+.glosario-full dt{font-weight:500; display:inline}
+.glosario-full dd{display:inline; margin:0; color:var(--ink-soft)}
+.vacio{color:var(--ink-faint); font-size:15px}
+
+footer{padding:56px 0 76px; border-top:1px solid var(--linea); color:var(--ink-faint); font-size:14px}
+footer p{margin:0 0 8px; max-width:70ch}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .intro-grid{grid-template-columns:1fr; gap:26px}
+  .plano-fig{grid-template-columns:1fr}
+  .pasaje{grid-template-columns:1fr; gap:0}
+  .glosa{display:none}
+  .prosa{font-size:19px; max-width:none}
+  .glosario-full{columns:2 220px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .prosa{font-size:18.5px; line-height:1.72}
+  .prosa p{text-align:left}
+  .pregunta{grid-template-columns:1fr; gap:8px}
+  .pregunta .n{font-size:20px}
+  .controles nav{gap:0; overflow-x:auto; flex-wrap:nowrap; -webkit-overflow-scrolling:touch}
+  .controles nav a{white-space:nowrap}
+  .glosario-full{columns:1}
+}
+
+.glosa summary{display:none}
+
+/* aviso de lectura */
+.aviso-lectura{
+  display:flex; gap:12px; align-items:baseline;
+  margin:0 0 clamp(28px,4vw,44px); padding:14px 18px;
+  border-left:2px solid var(--hebra); background:var(--card);
+  font-size:14.5px; color:var(--ink-soft); max-width:62ch; line-height:1.55;
+}
+.aviso-lectura b{color:var(--ink); font-weight:500}
+
+@media print{
+  .controles, .estados, #hilo, .acciones, .fila button, footer .btn{display:none!important}
+  body{background:#fff; color:#000; font-size:11pt}
+  .pasaje{grid-template-columns:1fr 210px; page-break-inside:auto}
+  .glosa{display:block; position:static; max-height:none; overflow:visible}
+  .aviso-lectura{display:none}
+  .prosa{font-size:11.5pt}
+  .seccion, .lectura, .intro{padding:18pt 0}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div id="hilo" aria-hidden="true"></div>
+<div id="pop" role="dialog" aria-live="polite"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Club de lectura en español · <b>Material para leer antes del encuentro</b></p>
+    <h1>Casa<span class="t2">tomada</span></h1>
+    <p class="autoria">Julio Cortázar <span>— Buenos Aires, 1946</span></p>
+    <div class="metas">
+      <div><b>Duración estimada de lectura</b>15 a 20 minutos</div>
+      <div><b>Nivel</b>Intermedio · B1–B2</div>
+      <div><b>Qué trae este material</b>Presentación, cuento con glosario y preguntas</div>
+    </div>
+  </div>
+</header>
+
+<div class="controles">
+  <div class="wrap">
+    <nav aria-label="Secciones">
+      <a href="#presentacion">Presentación</a>
+      <a href="#cuento">El cuento</a>
+      <a href="#plano">El plano</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#glosario">Glosario</a>
+    </nav>
+    <button class="btn" id="toggleMarcas" aria-pressed="true"><span class="dot"></span>Vocabulario marcado</button>
+    <button class="btn" id="toggleTema" aria-pressed="false">Modo noche</button>
+  </div>
+</div>
+
+<section class="intro" id="presentacion">
+  <div class="wrap intro-grid">
+    <div>
+      <h2>Antes de entrar</h2>
+      <p>Cinco cosas que conviene saber para leer el cuento con más contexto. No hace falta memorizarlas: son los hilos que vamos a tirar en el encuentro.</p>
+    </div>
+    <div class="notas">
+      <div class="nota">
+        <span class="anio">1946</span>
+        <p><strong>Se publica por primera vez</strong> en <em>Los Anales de Buenos Aires</em>, una revista literaria dirigida por Jorge Luis Borges.</p>
+      </div>
+      <div class="nota">
+        <span class="anio">1951</span>
+        <p><strong>Se incluye en <em>Bestiario</em></strong>, el libro de cuentos con el que Cortázar obtiene el reconocimiento de la escena literaria nacional e internacional.</p>
+      </div>
+      <div class="nota">
+        <span class="anio">Poe</span>
+        <p>Cortázar era <strong>admirador y traductor de Edgar Allan Poe</strong>. Pudo haberse inspirado en <em>La caída de la casa Usher</em> al crear este relato.</p>
+      </div>
+      <div class="nota">
+        <span class="anio">1960</span>
+        <p>Es un cuento que <strong>bordea lo fantástico</strong> y por eso está abierto a las interpretaciones. Una lectura muy influyente en la literatura argentina es la de <strong>Juan José Sebreli</strong>, en los años sesenta: interpretó la toma de la casa como una alegoría del avance del peronismo en la Argentina. Lo trabajamos en el encuentro.</p>
+      </div>
+      <div class="nota">
+        <span class="anio">Hoy</span>
+        <p>Es uno de los relatos <strong>más famosos y más estudiados</strong> por la crítica de Cortázar. Cada generación lo lee de nuevo y le encuentra otra cosa adentro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="lectura" id="cuento">
+  <div class="wrap">
+
+    <p class="aviso-lectura">Las palabras subrayadas tienen glosario: <b>tocalas o hacé clic</b> para ver el significado sin perder el hilo. En pantallas anchas también aparecen en la columna de la derecha, y al final de la página están las sesenta juntas.</p>
+
+    <article class="pasaje" data-terms="sucumbir,persistir,estorbarse,bastarse,clausura,genealogia,vago,esquivo,voltear">
+      <div class="prosa">
+        <p class="capitular">Nos gustaba la casa porque aparte de espaciosa y antigua (hoy que las casas antiguas <span class="v" data-g="sucumbir" tabindex="0" role="button">sucumben</span> a la más ventajosa liquidación de sus materiales) guardaba los recuerdos de nuestros bisabuelos, el abuelo paterno, nuestros padres y toda la infancia. Nos habituamos Irene y yo a <span class="v" data-g="persistir" tabindex="0" role="button">persistir</span> solos en ella, lo que era una locura pues en esa casa podían vivir ocho personas sin <span class="v" data-g="estorbarse" tabindex="0" role="button">estorbarse</span>. Hacíamos la limpieza por la mañana, levantándonos a las siete, y a eso de las once yo le dejaba a Irene las últimas habitaciones por repasar y me iba a la cocina. Almorzábamos al mediodía, siempre puntuales; ya no quedaba nada por hacer fuera de unos platos sucios. Nos resultaba grato almorzar pensando en la casa profunda y silenciosa y cómo nos <span class="v" data-g="bastarse" tabindex="0" role="button">bastábamos</span> para mantenerla limpia. A veces llegábamos a creer que era ella la que no nos dejó casarnos. Irene rechazó dos pretendientes sin mayor motivo, a mí se me murió María Esther antes de que llegáramos a comprometernos. Entramos en los cuarenta años con la inexpresada idea de que el nuestro, simple y silencioso matrimonio de hermanos, era necesaria <span class="v" data-g="clausura" tabindex="0" role="button">clausura</span> de la <span class="v" data-g="genealogia" tabindex="0" role="button">genealogía</span> asentada por nuestros bisabuelos en nuestra casa. Nos moriríamos allí algún día, <span class="v" data-g="vago" tabindex="0" role="button">vagos</span> y <span class="v" data-g="esquivo" tabindex="0" role="button">esquivos</span> primos se quedarían con la casa y la echarían al suelo para enriquecerse con el terreno y los ladrillos; o mejor, nosotros mismos la <span class="v" data-g="voltear" tabindex="0" role="button">voltearíamos</span> justicieramente antes de que fuese demasiado tarde.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="matinal,pretexto,tricota,mananitas,destejer,encrespado,madeja,vanamente">
+      <div class="prosa">
+        <p>Irene era una chica nacida para no molestar a nadie. Aparte de su actividad <span class="v" data-g="matinal" tabindex="0" role="button">matinal</span> se pasaba el resto del día tejiendo en el sofá de su dormitorio. No sé por qué tejía tanto, yo creo que las mujeres tejen cuando han encontrado en esa labor el gran <span class="v" data-g="pretexto" tabindex="0" role="button">pretexto</span> para no hacer nada. Irene no era así, tejía cosas siempre necesarias, <span class="v" data-g="tricota" tabindex="0" role="button">tricotas</span> para el invierno, medias para mí, <span class="v" data-g="mananitas" tabindex="0" role="button">mañanitas</span> y chalecos para ella. A veces tejía un chaleco y después lo <span class="v" data-g="destejer" tabindex="0" role="button">destejía</span> en un momento porque algo no le agradaba; era gracioso ver en la canastilla el montón de lana <span class="v" data-g="encrespado" tabindex="0" role="button">encrespada</span> resistiéndose a perder su forma de algunas horas. Los sábados iba yo al centro a comprarle lana; Irene tenía fe en mi gusto, se complacía con los colores y nunca tuve que devolver <span class="v" data-g="madeja" tabindex="0" role="button">madejas</span>. Yo aprovechaba esas salidas para dar una vuelta por las librerías y preguntar <span class="v" data-g="vanamente" tabindex="0" role="button">vanamente</span> si había novedades en literatura francesa. Desde 1939 no llegaba nada valioso a la Argentina.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="comoda,panoleta,naftalina,merceria,erizo">
+      <div class="prosa">
+        <p>Pero es de la casa que me interesa hablar, de la casa y de Irene, porque yo no tengo importancia. Me pregunto qué hubiera hecho Irene sin el tejido. Uno puede releer un libro, pero cuando un pullover está terminado no se puede repetirlo sin escándalo. Un día encontré el cajón de abajo de la <span class="v" data-g="comoda" tabindex="0" role="button">cómoda de alcanfor</span> lleno de <span class="v" data-g="panoleta" tabindex="0" role="button">pañoletas</span> blancas, verdes, lila. Estaban con <span class="v" data-g="naftalina" tabindex="0" role="button">naftalina</span>, apiladas como en una <span class="v" data-g="merceria" tabindex="0" role="button">mercería</span>; no tuve valor para preguntarle a Irene qué pensaba hacer con ellas. No necesitábamos ganarnos la vida, todos los meses llegaba plata de los campos y el dinero aumentaba. Pero a Irene solamente la entretenía el tejido, mostraba una destreza maravillosa y a mí se me iban las horas viéndole las manos como <span class="v" data-g="erizo" tabindex="0" role="button">erizos</span> plateados, agujas yendo y viniendo y una o dos canastillas en el suelo donde se agitaban constantemente los ovillos. Era hermoso.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="gobelino,living,zaguan,mayolica,cancel,franquear,advertir,macrame">
+      <div class="prosa">
+        <p>Cómo no acordarme de la distribución de la casa. El comedor, una sala con <span class="v" data-g="gobelino" tabindex="0" role="button">gobelinos</span>, la biblioteca y tres dormitorios grandes quedaban en la parte más retirada, la que mira hacia Rodríguez Peña. Solamente un pasillo con su maciza puerta de roble aislaba esa parte del ala delantera donde había un baño, la cocina, nuestros dormitorios y el <span class="v" data-g="living" tabindex="0" role="button">living</span> central, al cual comunicaban los dormitorios y el pasillo. Se entraba a la casa por un <span class="v" data-g="zaguan" tabindex="0" role="button">zaguán</span> con <span class="v" data-g="mayolica" tabindex="0" role="button">mayólica</span>, y la <span class="v" data-g="cancel" tabindex="0" role="button">puerta cancel</span> daba al living. De manera que uno entraba por el zaguán, abría la cancel y pasaba al living; tenía a los lados las puertas de nuestros dormitorios, y al frente el pasillo que conducía a la parte más retirada; avanzando por el pasillo se <span class="v" data-g="franquear" tabindex="0" role="button">franqueaba</span> la puerta de roble y más allá empezaba el otro lado de la casa, o bien se podía girar a la izquierda justamente antes de la puerta y seguir por un pasillo más estrecho que llevaba a la cocina y el baño. Cuando la puerta estaba abierta <span class="v" data-g="advertir" tabindex="0" role="button">advertía</span> uno que la casa era muy grande; si no, daba la impresión de un departamento de los que se edifican ahora, apenas para moverse; Irene y yo vivíamos siempre en esta parte de la casa, casi nunca íbamos más allá de la puerta de roble, salvo para hacer la limpieza, pues es increíble cómo se junta tierra en los muebles. Buenos Aires será una ciudad limpia, pero eso lo debe a sus habitantes y no a otra cosa. Hay demasiada tierra en el aire, apenas sopla una ráfaga se palpa el polvo en los mármoles de las consolas y entre los rombos de las carpetas de <span class="v" data-g="macrame" tabindex="0" role="button">macramé</span>; da trabajo sacarlo bien con plumero, vuela y se suspende en el aire, un momento después se deposita de nuevo en los muebles y los pianos.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <div class="corte"><span>Primera toma</span></div>
+
+    <article class="pasaje" data-terms="pavita,entornado,codo,susurro,cerrojo">
+      <div class="prosa">
+        <p>Lo recordaré siempre con claridad porque fue simple y sin circunstancias inútiles. Irene estaba tejiendo en su dormitorio, eran las ocho de la noche y de repente se me ocurrió poner al fuego la <span class="v" data-g="pavita" tabindex="0" role="button">pavita</span> del mate. Fui por el pasillo hasta enfrentar la <span class="v" data-g="entornado" tabindex="0" role="button">entornada</span> puerta de roble, y daba la vuelta al <span class="v" data-g="codo" tabindex="0" role="button">codo</span> que llevaba a la cocina cuando escuché algo en el comedor o en la biblioteca. El sonido venía impreciso y sordo, como un volcarse de silla sobre la alfombra o un ahogado <span class="v" data-g="susurro" tabindex="0" role="button">susurro</span> de conversación. También lo oí, al mismo tiempo o un segundo después, en el fondo del pasillo que traía desde aquellas piezas hasta la puerta. Me tiré contra la pared antes de que fuera demasiado tarde, la cerré de golpe apoyando el cuerpo; felizmente la llave estaba puesta de nuestro lado y además corrí el gran <span class="v" data-g="cerrojo" tabindex="0" role="button">cerrojo</span> para más seguridad. Fui a la cocina, calenté la pavita, y cuando estuve de vuelta con la bandeja del mate le dije a Irene:</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="cebar,reanudar">
+      <div class="prosa">
+        <p class="dialogo">—Tuve que cerrar la puerta del pasillo. Han tomado parte del fondo.</p>
+        <p>Dejó caer el tejido y me miró con sus graves ojos cansados.</p>
+        <p class="dialogo">—¿Estás seguro?</p>
+        <p>Asentí.</p>
+        <p class="dialogo">—Entonces —dijo recogiendo las agujas— tendremos que vivir en este lado.</p>
+        <p>Yo <span class="v" data-g="cebar" tabindex="0" role="button">cebaba</span> el mate con mucho cuidado, pero ella tardó un rato en <span class="v" data-g="reanudar" tabindex="0" role="button">reanudar</span> su labor. Me acuerdo que me tejía un chaleco gris; a mí me gustaba ese chaleco.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="pantuflas,enebro,hesperidina">
+      <div class="prosa">
+        <p>Los primeros días nos pareció penoso porque ambos habíamos dejado en la parte tomada muchas cosas que queríamos. Mis libros de literatura francesa, por ejemplo, estaban todos en la biblioteca. Irene extrañaba unas carpetas, un par de <span class="v" data-g="pantuflas" tabindex="0" role="button">pantuflas</span> que tanto abrigaban en invierno. Yo sentía mi <span class="v" data-g="enebro" tabindex="0" role="button">pipa de enebro</span> y creo que Irene pensó en una botella de <span class="v" data-g="hesperidina" tabindex="0" role="button">Hesperidina</span> de muchos años. Con frecuencia (pero esto solamente sucedió los primeros días) cerrábamos algún cajón de las cómodas y nos mirábamos con tristeza.</p>
+        <p class="dialogo">—No está aquí.</p>
+        <p>Y era una cosa más de todo lo que habíamos perdido al otro lado de la casa.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="ventaja,fiambre,afligir">
+      <div class="prosa">
+        <p>Pero también tuvimos <span class="v" data-g="ventaja" tabindex="0" role="button">ventajas</span>. La limpieza se simplificó tanto que aun levantándose tardísimo, a las nueve y media por ejemplo, no daban las once y ya estábamos de brazos cruzados. Irene se acostumbró a ir conmigo a la cocina y ayudarme a preparar el almuerzo. Lo pensamos bien, y se decidió esto: mientras yo preparaba el almuerzo, Irene cocinaría platos para comer fríos de noche. Nos alegramos porque siempre resultaba molesto tener que abandonar los dormitorios al atardecer y ponerse a cocinar. Ahora nos bastaba con la mesa en el dormitorio de Irene y las fuentes de comida <span class="v" data-g="fiambre" tabindex="0" role="button">fiambre</span>.</p>
+        <p>Irene estaba contenta porque le quedaba más tiempo para tejer. Yo andaba un poco perdido a causa de los libros, pero por no <span class="v" data-g="afligir" tabindex="0" role="button">afligir</span> a mi hermana me puse a revisar la colección de estampillas de papá, y eso me sirvió para matar el tiempo. Nos divertíamos mucho, cada uno en sus cosas, casi siempre reunidos en el dormitorio de Irene que era más cómodo. A veces Irene decía:</p>
+        <p class="dialogo">—Fijate este punto que se me ha ocurrido. ¿No da un dibujo de trébol?</p>
+        <p>Un rato después era yo el que le ponía ante los ojos un cuadradito de papel para que viese el mérito de algún sello de Eupen y Malmédy. Estábamos bien, y poco a poco empezábamos a no pensar. Se puede vivir sin pensar.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="desvelarse,sacudon,cobertor,presentir,ademan,velador,crujido,filatelico,macizo,cuna,irrumpir,tornar">
+      <div class="prosa aparte">
+        <p>(Cuando Irene soñaba en alta voz yo me <span class="v" data-g="desvelarse" tabindex="0" role="button">desvelaba</span> en seguida. Nunca pude habituarme a esa voz de estatua o papagayo, voz que viene de los sueños y no de la garganta. Irene decía que mis sueños consistían en grandes <span class="v" data-g="sacudon" tabindex="0" role="button">sacudones</span> que a veces hacían caer el <span class="v" data-g="cobertor" tabindex="0" role="button">cobertor</span>. Nuestros dormitorios tenían el living de por medio, pero de noche se escuchaba cualquier cosa en la casa. Nos oíamos respirar, toser, <span class="v" data-g="presentir" tabindex="0" role="button">presentíamos</span> el <span class="v" data-g="ademan" tabindex="0" role="button">ademán</span> que conduce a la llave del <span class="v" data-g="velador" tabindex="0" role="button">velador</span>, los mutuos y frecuentes insomnios.</p>
+        <p>Aparte de eso todo estaba callado en la casa. De día eran los rumores domésticos, el roce metálico de las agujas de tejer, un <span class="v" data-g="crujido" tabindex="0" role="button">crujido</span> al pasar las hojas del álbum <span class="v" data-g="filatelico" tabindex="0" role="button">filatélico</span>. La puerta de roble, creo haberlo dicho, era <span class="v" data-g="macizo" tabindex="0" role="button">maciza</span>. En la cocina y el baño, que quedaban tocando la parte tomada, nos poníamos a hablar en voz más alta o Irene cantaba <span class="v" data-g="cuna" tabindex="0" role="button">canciones de cuna</span>. En una cocina hay demasiados ruidos de loza y vidrios para que otros sonidos <span class="v" data-g="irrumpir" tabindex="0" role="button">irrumpan</span> en ella. Muy pocas veces permitíamos allí el silencio, pero cuando <span class="v" data-g="tornar" tabindex="0" role="button">tornábamos</span> a los dormitorios y al living, entonces la casa se ponía callada y a media luz, hasta pisábamos despacio para no molestarnos. Yo creo que era por eso que de noche, cuando Irene empezaba a soñar en alta voz, me desvelaba en seguida.)</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <div class="corte"><span>Segunda toma</span></div>
+
+    <article class="pasaje" data-terms="brusco">
+      <div class="prosa">
+        <p>Es casi repetir lo mismo salvo las consecuencias. De noche siento sed, y antes de acostarnos le dije a Irene que iba hasta la cocina a servirme un vaso de agua. Desde la puerta del dormitorio (ella tejía) oí ruido en la cocina; tal vez en la cocina o tal vez en el baño porque el codo del pasillo apagaba el sonido. A Irene le llamó la atención mi <span class="v" data-g="brusco" tabindex="0" role="button">brusca</span> manera de detenerme, y vino a mi lado sin decir palabra. Nos quedamos escuchando los ruidos, notando claramente que eran de este lado de la puerta de roble, en la cocina y el baño, o en el pasillo mismo donde empezaba el codo casi al lado nuestro.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+    <article class="pasaje" data-terms="hebra,rodear,alcantarilla,pobrediablo">
+      <div class="prosa">
+        <p>No nos miramos siquiera. Apreté el brazo de Irene y la hice correr conmigo hasta la puerta cancel, sin volvernos hacia atrás. Los ruidos se oían más fuerte pero siempre sordos, a espaldas nuestras. Cerré de un golpe la cancel y nos quedamos en el zaguán. Ahora no se oía nada.</p>
+        <p class="dialogo">—Han tomado esta parte —dijo Irene. El tejido le colgaba de las manos y las <span class="v" data-g="hebra" tabindex="0" role="button">hebras</span> iban hasta la cancel y se perdían debajo. Cuando vio que los ovillos habían quedado del otro lado, soltó el tejido sin mirarlo.</p>
+        <p class="dialogo">—¿Tuviste tiempo de traer alguna cosa? —le pregunté inútilmente.</p>
+        <p class="dialogo">—No, nada.</p>
+        <p>Estábamos con lo puesto. Me acordé de los quince mil pesos en el armario de mi dormitorio. Ya era tarde ahora.</p>
+        <p>Como me quedaba el reloj pulsera, vi que eran las once de la noche. <span class="v" data-g="rodear" tabindex="0" role="button">Rodeé</span> con mi brazo la cintura de Irene (yo creo que ella estaba llorando) y salimos así a la calle. Antes de alejarnos tuve lástima, cerré bien la puerta de entrada y tiré la llave a la <span class="v" data-g="alcantarilla" tabindex="0" role="button">alcantarilla</span>. No fuese que a algún <span class="v" data-g="pobrediablo" tabindex="0" role="button">pobre diablo</span> se le ocurriera robar y se metiera en la casa, a esa hora y con la casa tomada.</p>
+      </div>
+      <aside class="glosa"></aside>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="plano" id="plano">
+  <div class="wrap">
+    <div class="plano-cab">
+      <div>
+        <h2>El plano de la casa</h2>
+        <p>El narrador describe la distribución con una precisión de agrimensor. Este plano sigue el que dibujó el diseñador argentino Juan Fresán para el cuento: la calle queda a la derecha y el fondo, el que mira hacia Rodríguez Peña, a la izquierda. Pasá por los tres estados y vas a ver cómo el espacio habitable se achica hasta desaparecer.</p>
+      </div>
+      <div class="estados" role="tablist" aria-label="Estados de la casa">
+        <button role="tab" aria-selected="true" data-estado="0">La casa entera</button>
+        <button role="tab" aria-selected="false" data-estado="1">Han tomado el fondo</button>
+        <button role="tab" aria-selected="false" data-estado="2">Han tomado esta parte</button>
+      </div>
+    </div>
+
+    <svg class="plano-svg" viewBox="0 0 1000 500" role="img" aria-labelledby="planoTitulo">
+      <title id="planoTitulo">Plano de la casa. A la derecha, el zaguán, la puerta cancel, el living central y los dos dormitorios. En el medio, el pasillo, el baño y la cocina. A la izquierda, detrás de la puerta de roble, las seis piezas del fondo: comedor, sala con gobelinos, biblioteca y tres dormitorios grandes.</title>
+
+      <!-- fondo: seis piezas -->
+      <rect class="pieza" data-zona="fondo" x="50" y="90" width="120" height="145"/>
+      <rect class="pieza" data-zona="fondo" x="170" y="90" width="120" height="145"/>
+      <rect class="pieza" data-zona="fondo" x="290" y="90" width="120" height="145"/>
+      <rect class="pieza" data-zona="fondo" x="50" y="245" width="120" height="145"/>
+      <rect class="pieza" data-zona="fondo" x="170" y="245" width="120" height="145"/>
+      <rect class="pieza" data-zona="fondo" x="290" y="245" width="120" height="145"/>
+
+      <!-- pasillo, codo, baño y cocina -->
+      <rect class="pieza" data-zona="frente" x="410" y="215" width="255" height="50"/>
+      <rect class="pieza" data-zona="frente" x="450" y="265" width="50" height="90"/>
+      <rect class="pieza" data-zona="frente" x="500" y="265" width="110" height="90"/>
+      <rect class="pieza" data-zona="frente" x="450" y="355" width="160" height="110"/>
+
+      <!-- living y dormitorios, con las esquinas ochavadas del plano original -->
+      <polygon class="pieza" data-zona="frente" points="683,130 847,130 865,148 865,332 847,350 683,350 665,332 665,148"/>
+      <polygon class="pieza" data-zona="frente" points="709,30 821,30 835,44 835,130 695,130 695,44"/>
+      <polygon class="pieza" data-zona="frente" points="695,350 835,350 835,436 821,450 709,450 695,436"/>
+
+      <!-- zaguán y cancel -->
+      <rect class="pieza" data-zona="zaguan" x="865" y="210" width="50" height="60"/>
+      <rect class="pieza" data-zona="zaguan" x="915" y="210" width="60" height="60"/>
+
+      <!-- las dos puertas que deciden el cuento -->
+      <line class="hoja" x1="410" y1="222" x2="410" y2="258"/>
+      <line class="hoja" x1="865" y1="218" x2="865" y2="262"/>
+
+      <g class="marca-num" data-zona="fondo"><circle cx="110" cy="162" r="14"/><text x="110" y="167" text-anchor="middle">15</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="230" cy="162" r="14"/><text x="230" y="167" text-anchor="middle">13</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="350" cy="162" r="14"/><text x="350" y="167" text-anchor="middle">11</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="110" cy="317" r="14"/><text x="110" y="322" text-anchor="middle">16</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="230" cy="317" r="14"/><text x="230" y="322" text-anchor="middle">14</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="350" cy="317" r="14"/><text x="350" y="322" text-anchor="middle">12</text></g>
+      <g class="marca-num" data-zona="fondo"><circle cx="432" cy="240" r="14"/><text x="432" y="245" text-anchor="middle">10</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="630" cy="240" r="14"/><text x="630" y="245" text-anchor="middle">6</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="475" cy="310" r="14"/><text x="475" y="315" text-anchor="middle">7</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="555" cy="310" r="14"/><text x="555" y="315" text-anchor="middle">8</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="530" cy="410" r="14"/><text x="530" y="415" text-anchor="middle">9</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="765" cy="240" r="14"/><text x="765" y="245" text-anchor="middle">3</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="765" cy="80" r="14"/><text x="765" y="85" text-anchor="middle">4</text></g>
+      <g class="marca-num" data-zona="frente"><circle cx="765" cy="400" r="14"/><text x="765" y="405" text-anchor="middle">5</text></g>
+      <g class="marca-num" data-zona="zaguan"><circle cx="890" cy="240" r="14"/><text x="890" y="245" text-anchor="middle">2</text></g>
+      <g class="marca-num" data-zona="zaguan"><circle cx="945" cy="240" r="14"/><text x="945" y="245" text-anchor="middle">1</text></g>
+
+      <text class="rotulo" x="50" y="60">hacia Rodríguez Peña</text>
+      <text class="rotulo" x="975" y="60" text-anchor="end">la calle</text>
+    </svg>
+
+    <div class="plano-abajo">
+      <div class="plano-leyenda">
+        <p id="planoTexto">Ocho personas podían vivir acá sin estorbarse. Irene y el narrador ocupan apenas el ala delantera: los dos dormitorios, el living, la cocina y el baño. Del otro lado de la puerta de roble está la parte más retirada, que solo visitan para limpiar.</p>
+        <p class="cita" id="planoCita">Cuando la puerta estaba abierta advertía uno que la casa era muy grande.</p>
+      </div>
+      <ol class="clave">
+        <li><b>1</b> Zaguán con mayólica</li>
+        <li><b>2</b> Puerta cancel</li>
+        <li><b>3</b> Living central</li>
+        <li><b>4</b> Dormitorio del narrador</li>
+        <li><b>5</b> Dormitorio de Irene</li>
+        <li><b>6</b> Pasillo</li>
+        <li><b>7</b> Codo del pasillo</li>
+        <li><b>8</b> Baño</li>
+        <li><b>9</b> Cocina</li>
+        <li><b>10</b> Puerta de roble</li>
+        <li><b>11</b> Comedor</li>
+        <li><b>12</b> Sala con gobelinos</li>
+        <li><b>13</b> Biblioteca</li>
+        <li><b>14</b> Dormitorio grande</li>
+        <li><b>15</b> Dormitorio grande</li>
+        <li><b>16</b> Dormitorio grande</li>
+        <li class="credito">La numeración reproduce el plano de Juan Fresán. Los nombres de las seis piezas del fondo son nuestra lectura: el cuento las enumera sin decir cuál es cuál, así que podemos discutirlas en el encuentro.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="seccion alt" id="preguntas">
+  <div class="wrap">
+    <div class="seccion-cab">
+      <h2>Para pensar antes del encuentro</h2>
+      <p>Con estas cinco preguntas empezamos la conversación. Escribí lo que se te ocurra, aunque sea en frases sueltas: tus respuestas quedan guardadas en este navegador y las podés copiar para traerlas.</p>
+    </div>
+
+    <div class="preguntas" id="listaPreguntas">
+      <div class="pregunta">
+        <span class="n">1</span>
+        <div>
+          <h3>¿Cómo era la vida cotidiana de Irene y el narrador antes de la toma de la casa?</h3>
+          <textarea data-nota="p1" placeholder="Los horarios, la limpieza, el tejido, el mate, las estampillas…"></textarea>
+          <div class="fila">
+            <button class="btn" data-pista="h1">Ver pista</button>
+          </div>
+          <p class="pista" id="h1" hidden>Fijate en la precisión de los horarios y en lo poco que sale cada uno de la casa. ¿Es una rutina elegida o una rutina heredada? Prestá atención a la frase sobre el "silencioso matrimonio de hermanos".</p>
+        </div>
+      </div>
+
+      <div class="pregunta">
+        <span class="n">2</span>
+        <div>
+          <h3>¿Qué pistas del texto nos ayudan a saber cuándo y dónde transcurre la historia?</h3>
+          <textarea data-nota="p2" placeholder="Nombres de calles, objetos, costumbres, fechas…"></textarea>
+          <div class="fila">
+            <button class="btn" data-pista="h2">Ver pista</button>
+          </div>
+          <p class="pista" id="h2" hidden>Hay una calle con nombre propio, una ciudad nombrada, un año concreto ligado a los libros franceses, una bebida, una moneda y varios objetos que ubican la escena en una casa acomodada de la primera mitad del siglo XX.</p>
+        </div>
+      </div>
+
+      <div class="pregunta">
+        <span class="n">3</span>
+        <div>
+          <h3>¿Cómo reaccionan el narrador e Irene al enterarse de que una parte de la casa ha sido tomada?</h3>
+          <textarea data-nota="p3" placeholder="Qué preguntan, qué no preguntan, qué hacen después…"></textarea>
+          <div class="fila">
+            <button class="btn" data-pista="h3">Ver pista</button>
+          </div>
+          <p class="pista" id="h3" hidden>Compará lo que esperarías de alguien invadido con lo que efectivamente hacen. Nadie pregunta quiénes son ni qué quieren. Contá cuántas líneas pasan entre la noticia y la vuelta a la normalidad.</p>
+        </div>
+      </div>
+
+      <div class="pregunta">
+        <span class="n">4</span>
+        <div>
+          <h3>¿Qué significa esta frase del narrador: <span class="cita-int">“poco a poco empezábamos a no pensar. Se puede vivir sin pensar”</span>?</h3>
+          <textarea data-nota="p4" placeholder="¿Es alivio, resignación, advertencia, ironía del autor?"></textarea>
+          <div class="fila">
+            <button class="btn" data-pista="h4">Ver pista</button>
+          </div>
+          <p class="pista" id="h4" hidden>Aparece justo después de la lista de "ventajas" de haber perdido media casa. Preguntate quién dice la frase y si el cuento la comparte. Acá se apoya buena parte de la lectura alegórica de Sebreli.</p>
+        </div>
+      </div>
+
+      <div class="pregunta">
+        <span class="n">5</span>
+        <div>
+          <h3>¿Qué sucede al final del cuento cuando los ruidos se escuchan del lado delantero de la puerta?</h3>
+          <textarea data-nota="p5" placeholder="El tejido, los ovillos, los quince mil pesos, la llave…"></textarea>
+          <div class="fila">
+            <button class="btn" data-pista="h5">Ver pista</button>
+          </div>
+          <p class="pista" id="h5" hidden>Miran el reloj, salen con lo puesto y hacen un último gesto que parece de cortesía. ¿Con quién se solidarizan en esa última frase? ¿Y con quién no?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acciones">
+      <button class="btn" id="copiarNotas">Copiar mis respuestas</button>
+      <button class="btn" id="borrarNotas">Borrar todo</button>
+      <p class="aviso" id="avisoNotas">Se guardan solas mientras escribís.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="wrap">
+    <div class="seccion-cab">
+      <h2>Comprobá tu lectura</h2>
+      <p>Cinco preguntas rápidas sobre detalles del texto. Elegí una opción y se corrige sola.</p>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <p class="marcador" id="marcador"></p>
+  </div>
+</section>
+
+<section class="seccion alt" id="glosario">
+  <div class="wrap">
+    <div class="seccion-cab">
+      <h2>Glosario completo</h2>
+      <p>Las sesenta palabras marcadas en el cuento, ordenadas alfabéticamente.</p>
+    </div>
+    <div class="buscador">
+      <input type="search" id="buscar" placeholder="Buscar una palabra" aria-label="Buscar una palabra en el glosario">
+      <span class="aviso" id="contador"></span>
+    </div>
+    <dl class="glosario-full" id="glosarioFull"></dl>
+    <p class="vacio" id="sinResultados" hidden>No hay ninguna palabra con ese nombre en el glosario.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>“Casa tomada”, de Julio Cortázar. Publicado en <em>Los Anales de Buenos Aires</em> en 1946 y recogido en <em>Bestiario</em> (1951).</p>
+    <p>Material de lectura preparado para el club. Nos vemos en el encuentro con las respuestas a mano.</p>
+  </div>
+</footer>
+
+<script>
+const GLOSARIO = {
+  sucumbir:["sucumbir","ceder, rendirse o ser destruido. En el relato se refiere a cómo las casas antiguas son demolidas para vender sus materiales o comerciar el terreno."],
+  persistir:["persistir","durar o mantenerse durante mucho tiempo; continuar existiendo a pesar de las circunstancias."],
+  estorbarse:["estorbarse","molestarse o interponerse en el camino el uno del otro."],
+  bastarse:["bastarse","ser suficiente por sí mismo sin necesitar ayuda externa."],
+  clausura:["clausura","cierre definitivo o finalización formal de algo."],
+  genealogia:["genealogía","conjunto de los antepasados y ascendientes de una persona o familia."],
+  vago:["vago/a","indefinido, impreciso, borroso o poco claro (en el contexto del relato)."],
+  esquivo:["esquivo/a","que evita el trato, el contacto o la cercanía con los demás; huraño o movedizo."],
+  voltear:["voltear","tirar abajo, derribar una construcción; también dar vuelta algo."],
+  matinal:["matinal","relativo a la mañana; que ocurre o se realiza temprano en el día."],
+  pretexto:["pretexto","excusa o razón fingida para hacer o evitar hacer algo."],
+  tricota:["tricota","suéter o abrigo de lana tejido. Es la denominación tradicional argentina para estas prendas."],
+  mananitas:["mañanitas","prenda de vestir femenina, similar a una chaqueta corta o capa de abrigo liviana que se usa sobre los hombros."],
+  destejer:["destejer","deshacer un tejido de lana o hilo."],
+  encrespado:["encrespado/a","rizado, agitado o revuelto (se aplica a la lana, al cabello o al agua)."],
+  madeja:["madeja","hilo o lana recogido en vueltas iguales."],
+  vanamente:["vanamente","de manera inútil o en vano; sin conseguir el resultado esperado."],
+  comoda:["cómoda de alcanfor","mueble con cajones hecho de madera de alcanforero."],
+  panoleta:["pañoleta","prenda de tela triangular o cuadrada que se lleva sobre los hombros o la cabeza."],
+  naftalina:["naftalina","bolitas de sustancia química que se colocan entre la ropa para protegerla de las polillas."],
+  merceria:["mercería","tienda donde se venden artículos de costura, tejido y bordado (hilos, botones, agujas)."],
+  erizo:["erizo","animal pequeño cubierto de púas."],
+  gobelino:["gobelino","tapiz de pared artístico con dibujos o escenas tejidas, muy común en la decoración de casas antiguas o aristocráticas."],
+  living:["living","sala de estar o salón de la casa. Anglicismo naturalizado en el español rioplatense."],
+  zaguan:["zaguán","pasillo o vestíbulo cubierto ubicado a la entrada de la casa, entre la puerta de calle y el interior."],
+  mayolica:["mayólica","tipo de azulejo o cerámica fina decorada con esmalte metálico."],
+  cancel:["puerta cancel","puerta interior (frecuentemente de madera y vidrio o reja) que separa el zaguán de la zona principal de la vivienda."],
+  franquear:["franquear","atravesar, cruzar o pasar un límite, una puerta o un umbral."],
+  advertir:["advertir","darse cuenta de algo, notarlo o percibirlo."],
+  macrame:["macramé","técnica o tejido artesanal hecho con nudos decorativos."],
+  pavita:["pavita (del mate)","pava o tetera metálica pequeña con pico y asa que se usa para calentar el agua con la que se sirve el mate."],
+  entornado:["entornado/a","puerta casi cerrada, dejando solo una pequeña rendija."],
+  codo:["codo","articulación del brazo; se usa para indicar giro o esquina en ángulo recto dentro de un pasillo o estructura."],
+  susurro:["susurro","sonido suave, quedo y apacible que se produce al hablar en voz baja o al rozarse las cosas."],
+  cerrojo:["cerrojo","barra de hierro fija en la puerta para asegurarla por dentro."],
+  cebar:["cebar (el mate)","acción ritual de verter agua caliente en el recipiente del mate para prepararlo y servirlo."],
+  reanudar:["reanudar","volver a empezar una actividad o conversación después de una pausa o interrupción."],
+  pantuflas:["pantuflas","calzado cómodo, blando y sin talón para andar por casa (zapatilla de descanso)."],
+  enebro:["pipa de enebro","pipa para fumar fabricada con madera de enebro (un arbusto aromático)."],
+  hesperidina:["Hesperidina","licor aperitivo tradicional argentino a base de corteza de naranjas amargas y dulces, muy popular en la primera mitad del siglo XX."],
+  ventaja:["ventaja","condición favorable, provecho o beneficio de una situación respecto a otra."],
+  fiambre:["fiambre","carne fría ya elaborada (como embutidos o jamón) que se sirve lista para comer sin cocinar."],
+  afligir:["afligir","causar tristeza, pena o angustia a alguien."],
+  desvelarse:["desvelarse","perder el sueño o no poder dormir durante la noche."],
+  sacudon:["sacudón","movimiento repentino, brusco y violento (sacudida fuerte)."],
+  cobertor:["cobertor","manta gruesa, colcha o tejido de abrigo que se coloca sobre la cama."],
+  presentir:["presentir","intuir o sentir que algo va a suceder antes de que ocurra."],
+  ademan:["ademán","gesto o movimiento del cuerpo con el que se expresa una intención o sentimiento."],
+  velador:["velador","lámpara de mesa pequeña que se ubica al lado de la cama (en la mesa de luz)."],
+  crujido:["crujido","sonido característico que hacen ciertos materiales rígidos o secos (como la madera, las hojas o el piso) al pisarse o doblarse."],
+  filatelico:["filatélico/a","relativo al coleccionismo de sellos y estampillas postales."],
+  macizo:["macizo/a","sólido, fuerte, pesado, hecho de una sola pieza firme."],
+  cuna:["canción de cuna","melodía suave que se le canta a los niños pequeños para dormirlos."],
+  irrumpir:["irrumpir","entrar en un lugar de forma repentina, impetuosa o violenta."],
+  tornar:["tornar / tornarse","volver, regresar; o transformarse, convertirse en algo."],
+  brusco:["brusco/a","repentino, rápido o falto de suavidad y amabilidad."],
+  hebra:["hebra","hilo largo de lana, algodón u otro material que se usa para coser o tejer."],
+  rodear:["rodear","situarse o moverse alrededor de algo o de alguien."],
+  alcantarilla:["alcantarilla","rejilla o desagüe en la calle por donde se van las aguas de lluvia o los residuos urbanos."],
+  pobrediablo:["pobre diablo","expresión coloquial para referirse a una persona desdichada, insignificante o de poco valor."]
+};
+
+/* ---- glosario lateral de cada pasaje ---- */
+document.querySelectorAll(".pasaje").forEach(function(art){
+  var claves = (art.dataset.terms || "").split(",").filter(Boolean);
+  var aside = art.querySelector(".glosa");
+  if(!claves.length){ aside.remove(); return; }
+  var dl = claves.map(function(k){
+    var g = GLOSARIO[k]; if(!g) return "";
+    return '<div class="item" data-k="'+k+'"><dt>'+g[0]+'</dt><dd> — '+g[1]+'</dd></div>';
+  }).join("");
+  aside.innerHTML = '<details open><summary>Glosario de este pasaje ('+claves.length+')</summary>'
+    + '<h3>Glosario de este pasaje</h3><dl>'+dl+'</dl></details>';
+});
+
+/* ---- popover de vocabulario ---- */
+var pop = document.getElementById("pop");
+var activa = null;
+
+function cerrarPop(){
+  pop.classList.remove("visible");
+  if(activa){ activa.classList.remove("activa"); activa = null; }
+  document.querySelectorAll(".glosa .item.resaltado").forEach(function(e){ e.classList.remove("resaltado"); });
+}
+
+function abrirPop(el){
+  var g = GLOSARIO[el.dataset.g]; if(!g) return;
+  if(activa === el){ cerrarPop(); return; }
+  cerrarPop();
+  activa = el; el.classList.add("activa");
+  pop.innerHTML = "<strong>"+g[0]+"</strong>"+g[1];
+  pop.classList.add("visible");
+  var r = el.getBoundingClientRect();
+  var ancho = pop.offsetWidth;
+  var x = window.scrollX + r.left + r.width/2 - ancho/2;
+  x = Math.max(window.scrollX + 12, Math.min(x, window.scrollX + document.documentElement.clientWidth - ancho - 12));
+  var y = window.scrollY + r.bottom + 10;
+  if(r.bottom + pop.offsetHeight + 20 > window.innerHeight && r.top > pop.offsetHeight + 20){
+    y = window.scrollY + r.top - pop.offsetHeight - 10;
+  }
+  pop.style.left = x + "px";
+  pop.style.top = y + "px";
+  var art = el.closest(".pasaje");
+  if(art){
+    var item = art.querySelector('.glosa .item[data-k="'+el.dataset.g+'"]');
+    if(item) item.classList.add("resaltado");
+  }
+}
+
+document.addEventListener("click", function(e){
+  var v = e.target.closest(".v");
+  if(v){ e.preventDefault(); abrirPop(v); return; }
+  if(!e.target.closest("#pop")) cerrarPop();
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape") cerrarPop();
+  if((e.key === "Enter" || e.key === " ") && document.activeElement && document.activeElement.classList.contains("v")){
+    e.preventDefault(); abrirPop(document.activeElement);
+  }
+});
+window.addEventListener("resize", cerrarPop);
+
+/* ---- preferencias: marcas y tema ---- */
+function leer(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function guardar(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+var btnMarcas = document.getElementById("toggleMarcas");
+function aplicarMarcas(on){
+  document.body.classList.toggle("sin-marcas", !on);
+  btnMarcas.setAttribute("aria-pressed", on ? "true" : "false");
+  btnMarcas.lastChild.textContent = on ? "Vocabulario marcado" : "Vocabulario oculto";
+}
+aplicarMarcas(leer("ct_marcas") !== "0");
+btnMarcas.addEventListener("click", function(){
+  var on = btnMarcas.getAttribute("aria-pressed") !== "true";
+  aplicarMarcas(on); guardar("ct_marcas", on ? "1" : "0");
+});
+
+var btnTema = document.getElementById("toggleTema");
+var oscuroSistema = window.matchMedia("(prefers-color-scheme: dark)").matches;
+function aplicarTema(t){
+  document.documentElement.dataset.theme = t;
+  var oscuro = t === "dark";
+  btnTema.setAttribute("aria-pressed", oscuro ? "true" : "false");
+  btnTema.textContent = oscuro ? "Modo día" : "Modo noche";
+}
+aplicarTema(leer("ct_tema") || (oscuroSistema ? "dark" : "light"));
+btnTema.addEventListener("click", function(){
+  var t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  aplicarTema(t); guardar("ct_tema", t);
+});
+
+/* ---- plano ---- */
+var TEXTOS = [
+  ["Ocho personas podían vivir acá sin estorbarse. Irene y el narrador ocupan apenas el ala delantera: los dormitorios, el living, la cocina y el baño. Del otro lado de la puerta de roble está la parte más retirada, que solo visitan para limpiar.",
+   "Cuando la puerta estaba abierta advertía uno que la casa era muy grande."],
+  ["Ocho de la noche. El narrador va a calentar la pavita del mate, escucha algo en el comedor o en la biblioteca y cierra la puerta de roble con el cerrojo. La mitad del fondo queda del otro lado, con los libros franceses, las pantuflas y la Hesperidina.",
+   "Entonces —dijo recogiendo las agujas— tendremos que vivir en este lado."],
+  ["Once de la noche. Los ruidos ya suenan de este lado de la puerta de roble. Cierran la cancel de un golpe y salen a la calle con lo puesto: sin el tejido, sin los ovillos, sin los quince mil pesos. El narrador tira la llave a la alcantarilla.",
+   "No fuese que a algún pobre diablo se le ocurriera robar y se metiera en la casa, a esa hora y con la casa tomada."]
+];
+var piezas = document.querySelectorAll(".plano-svg .pieza, .plano-svg .marca-num");
+var planoTexto = document.getElementById("planoTexto");
+var planoCita = document.getElementById("planoCita");
+
+function pintarPlano(n){
+  piezas.forEach(function(p){
+    var z = p.dataset.zona;
+    var tomada = (n >= 1 && z === "fondo") || (n >= 2 && z === "frente");
+    p.classList.toggle(p.classList.contains("marca-num") ? "apagada" : "tomada", tomada);
+  });
+  planoTexto.textContent = TEXTOS[n][0];
+  planoCita.textContent = TEXTOS[n][1];
+}
+document.querySelectorAll(".estados button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll(".estados button").forEach(function(o){ o.setAttribute("aria-selected","false"); });
+    b.setAttribute("aria-selected","true");
+    pintarPlano(parseInt(b.dataset.estado,10));
+  });
+});
+
+/* ---- pistas ---- */
+document.querySelectorAll("[data-pista]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var p = document.getElementById(b.dataset.pista);
+    var oculta = p.hasAttribute("hidden");
+    if(oculta){ p.removeAttribute("hidden"); b.textContent = "Ocultar pista"; }
+    else { p.setAttribute("hidden",""); b.textContent = "Ver pista"; }
+  });
+});
+
+/* ---- notas ---- */
+var areas = document.querySelectorAll("textarea[data-nota]");
+var aviso = document.getElementById("avisoNotas");
+areas.forEach(function(t){
+  var v = leer("ct_" + t.dataset.nota);
+  if(v) t.value = v;
+  t.addEventListener("input", function(){
+    guardar("ct_" + t.dataset.nota, t.value);
+    aviso.textContent = "Guardado.";
+  });
+});
+document.getElementById("copiarNotas").addEventListener("click", function(){
+  var texto = "Casa tomada — mis notas\n\n";
+  document.querySelectorAll("#listaPreguntas .pregunta").forEach(function(p,i){
+    var t = p.querySelector("textarea");
+    texto += (i+1) + ". " + p.querySelector("h3").textContent.trim() + "\n" + (t.value.trim() || "(sin respuesta)") + "\n\n";
+  });
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(texto).then(function(){ aviso.textContent = "Copiado al portapapeles."; },
+      function(){ aviso.textContent = "No se pudo copiar. Seleccioná el texto a mano."; });
+  } else { aviso.textContent = "No se pudo copiar. Seleccioná el texto a mano."; }
+});
+document.getElementById("borrarNotas").addEventListener("click", function(){
+  areas.forEach(function(t){ t.value = ""; guardar("ct_" + t.dataset.nota, ""); });
+  aviso.textContent = "Respuestas borradas.";
+});
+
+/* ---- quiz ---- */
+var PREGUNTAS = [
+  {p:"¿Qué relación une a Irene y al narrador?",
+   o:["Son marido y mujer","Son hermanos","Son primos lejanos","Son madre e hijo"], c:1,
+   f:"El narrador habla de “nuestro simple y silencioso matrimonio de hermanos”: viven juntos como pareja de convivencia, pero son hermanos."},
+  {p:"¿Qué separa el ala delantera de la parte más retirada de la casa?",
+   o:["Una escalera de mármol","Un patio con mayólica","Una maciza puerta de roble","Una cortina de macramé"], c:2,
+   f:"El pasillo termina en una puerta de roble maciza. El narrador la cierra de golpe y corre además el cerrojo."},
+  {p:"¿Qué dato ubica la historia en un tiempo concreto?",
+   o:["Que desde 1939 no llegaba literatura francesa valiosa a la Argentina","Que Irene escucha la radio todas las tardes","Que el narrador menciona la Segunda Guerra","Que los primos viven en Europa"], c:0,
+   f:"La frase sobre 1939 y los libros franceses sitúa el relato alrededor de la Segunda Guerra. También ayudan la calle Rodríguez Peña y la mención de Buenos Aires."},
+  {p:"¿Cómo reacciona Irene cuando el narrador le dice que han tomado parte del fondo?",
+   o:["Llora y le pide que llame a la policía","Pregunta quiénes son y sale a mirar","Deja caer el tejido y acepta vivir de este lado","Insiste en recuperar sus cosas"], c:2,
+   f:"Solo pregunta “¿Estás seguro?” y concluye: “tendremos que vivir en este lado”. Nadie pregunta nunca quién ha tomado la casa."},
+  {p:"¿Qué hace el narrador con la llave al salir a la calle?",
+   o:["Se la guarda en el bolsillo","La deja puesta en la cerradura","Se la da a Irene","La tira a la alcantarilla"], c:3,
+   f:"La tira a la alcantarilla para que ningún pobre diablo entre a robar en una casa tomada. Es un gesto de cuidado hacia un desconocido, justo cuando acaban de perderlo todo."}
+];
+var contenedor = document.getElementById("quiz");
+var marcador = document.getElementById("marcador");
+var aciertos = 0, respondidas = 0;
+
+PREGUNTAS.forEach(function(q, i){
+  var div = document.createElement("div");
+  div.className = "q";
+  div.innerHTML = '<p class="enunciado">' + (i+1) + ". " + q.p + "</p>"
+    + '<div class="opciones">' + q.o.map(function(op, j){
+        return '<button class="opcion" data-j="'+j+'"><span class="marca"></span><span>'+op+'</span></button>';
+      }).join("") + "</div>"
+    + '<p class="feedback" hidden>' + q.f + "</p>";
+  contenedor.appendChild(div);
+
+  var listo = false;
+  div.querySelectorAll(".opcion").forEach(function(b){
+    b.addEventListener("click", function(){
+      if(listo) return;
+      listo = true; respondidas++;
+      var j = parseInt(b.dataset.j, 10);
+      if(j === q.c) aciertos++;
+      else b.classList.add("mal");
+      div.querySelectorAll(".opcion")[q.c].classList.add("bien");
+      div.querySelector(".feedback").removeAttribute("hidden");
+      marcador.textContent = aciertos + " de " + respondidas + " correctas"
+        + (respondidas === PREGUNTAS.length ? " — listo para el encuentro." : ".");
+    });
+  });
+});
+
+/* ---- glosario completo ---- */
+var full = document.getElementById("glosarioFull");
+var entradas = Object.keys(GLOSARIO).map(function(k){ return GLOSARIO[k]; })
+  .sort(function(a,b){ return a[0].localeCompare(b[0], "es"); });
+full.innerHTML = entradas.map(function(g){
+  return '<div class="item"><dt>'+g[0]+'</dt><dd> — '+g[1]+'</dd></div>';
+}).join("");
+
+var buscar = document.getElementById("buscar");
+var contador = document.getElementById("contador");
+var sinRes = document.getElementById("sinResultados");
+function normalizar(s){ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function filtrar(){
+  var q = normalizar(buscar.value.trim());
+  var visibles = 0;
+  full.querySelectorAll(".item").forEach(function(it){
+    var ok = !q || normalizar(it.textContent).indexOf(q) !== -1;
+    it.style.display = ok ? "" : "none";
+    if(ok) visibles++;
+  });
+  contador.textContent = q ? visibles + " de " + entradas.length + " palabras" : entradas.length + " palabras";
+  sinRes.hidden = visibles !== 0;
+}
+buscar.addEventListener("input", filtrar);
+filtrar();
+
+/* ---- hilo de progreso ---- */
+var hilo = document.getElementById("hilo");
+window.addEventListener("scroll", function(){
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  hilo.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+}, {passive:true});
+</script>
+
+</body>
+</html>
